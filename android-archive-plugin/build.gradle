@@ -1,0 +1,90 @@
+plugins {
+  //id 'groovy'
+  id 'java-gradle-plugin'
+}
+
+gradlePlugin {
+  plugins {
+    androidArchivePlugin {
+      id = 'android-archive'
+      implementationClass = 'cc.eevee.gradle.plugin.AndroidArchivePlugin'
+    }
+  }
+}
+
+version = '1.0.0'
+
+dependencies {
+  //compileOnly 'com.android.tools.build:gradle:3.1.4'
+  compileOnly builds.android.buildGradle
+}
+
+/*
+Publish the plugin to Nexus & JCenter:
+
+Step 1) Edit global gradle properties `$HOME/.gradle/gradle.properties`,
+
+```
+RELEASE_REPOSITORY_URL=http://localhost:8081/repository/maven-releases/
+SNAPSHOT_REPOSITORY_URL=http://localhost:8081/repository/maven-snapshots/
+NEXUS_USERNAME=admin
+NEXUS_PASSWORD=admin123
+
+BINTRAY_USERNAME=eevee
+BINTRAY_API_KEY=****************************************
+BINTRAY_REPO=maven
+```
+
+Step 2) Add `publication` plugin into `build.gradle` of root project.
+
+```
+buildscript {
+  dependencies {
+    // Gradle Maven Publication
+    //   https://github.com/kaedea/gradle-maven-publication
+    classpath 'com.kaedea:publication:0.3.2'
+  }
+}
+```
+
+Step 3) Go to the module, edit `build.gradle` to config the plugin.
+*/
+
+apply plugin: 'com.kaedea.publication'
+
+publication {
+  jarSources = true // optional
+  jarJavaDoc = true // optional
+  jarTests = false  // optional
+
+  GROUP('cc.eevee.gradle')      // required
+  VERSION_NAME(project.version) // required
+
+  POM_NAME('Android Archive Gradle plugin') // optional
+  POM_ARTIFACT_ID('android-archive-plugin') // optional
+  POM_PACKAGING('jar')                      // optional
+  POM_URL('https://github.com/joinAero/AndroidGradlePluginSamples/')    // optional
+  POM_DESCRIPTION('Gradle plugin that archive the sources and javadoc') // optional
+
+  POM_SCM_URL('https://github.com/joinAero/AndroidGradlePluginSamples/')  // optional
+  POM_SCM_CONNECTION('scm:git:git://github.com/joinAero/AndroidGradlePluginSamples.git')         // optional
+  POM_SCM_DEV_CONNECTION('scm:git:ssh://git@github.com:joinAero/AndroidGradlePluginSamples.git') // optional
+
+  POM_LICENCE_NAME('The Apache Software License, Version 2.0')      // optional
+  POM_LICENCE_URL('http://www.apache.org/licenses/LICENSE-2.0.txt') // optional
+  POM_LICENCE_DIST('repo')                                          // optional
+
+  POM_DEVELOPER_ID('joinAero')   // optional
+  POM_DEVELOPER_NAME('joinAero') // optional
+
+  uploadToBintray = true
+}
+
+/*
+Step 4) Publish the plugin to Nexus & JCenter.
+
+```
+gradle :uploadArchives
+gradle :bintrayUpload
+```
+*/

@@ -8,6 +8,9 @@ buildscript {
   }
   dependencies {
     classpath builds.android.buildGradle
+    // Gradle Maven Publication
+    //   https://github.com/kaedea/gradle-maven-publication
+    classpath 'com.kaedea:publication:0.3.2'
   }
 }
 
