@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'android-archive'
 
 android {
   compileSdkVersion versions.compileSdk
@@ -20,10 +21,10 @@ android {
 
 dependencies {
   implementation fileTree(dir: 'libs', include: ['*.jar'])
+
   implementation deps.support.appcompat
 
   testImplementation deps.junit
-
   androidTestImplementation deps.support.test.runner
   androidTestImplementation deps.support.test.espresso
 }

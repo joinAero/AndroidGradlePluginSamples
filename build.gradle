@@ -11,6 +11,7 @@ buildscript {
     // Gradle Maven Publication
     //   https://github.com/kaedea/gradle-maven-publication
     classpath 'com.kaedea:publication:0.3.2'
+    classpath 'cc.eevee.gradle:android-archive-plugin:1.0.0'
   }
 }
 
