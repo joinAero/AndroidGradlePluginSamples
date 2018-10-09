@@ -1,7 +1,7 @@
 ext {
   builds = [
     'android': [
-      buildGradle: 'com.android.tools.build:gradle:3.1.4',
+      buildGradle: 'com.android.tools.build:gradle:3.2.0',
     ],
   ]
 

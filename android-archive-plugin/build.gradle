@@ -88,3 +88,12 @@ gradle :uploadArchives
 gradle :bintrayUpload
 ```
 */
+
+/*
+afterEvaluate {
+  androidJavadoc.failOnError = false
+  androidJavadoc.options.addStringOption('Xdoclint:none', '-quiet')
+  androidJavadoc.options.addStringOption('encoding', 'UTF-8')
+  androidJavadoc.options.addStringOption('charset', 'UTF-8')
+}
+*/
